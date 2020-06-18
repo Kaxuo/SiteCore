@@ -52,11 +52,11 @@ function Collections({ thumbnail, itemloading, collections, loading, runAssetsBy
                 height: "15vw"
             },
         },
-        tags:{
-            margin:5,
-            color:"black",
-            backgroundColor:"white",
-            borderRadius:5
+        tags: {
+            margin: 5,
+            color: "black",
+            backgroundColor: "white",
+            borderRadius: 5
         }
     }));
 
@@ -69,11 +69,13 @@ function Collections({ thumbnail, itemloading, collections, loading, runAssetsBy
         <Box className={classes.sidebar}>
             <Box style={{ height: "100%" }} display="flex" justifyContent="space-around" flexDirection="column" alignItems="center">
                 <h2 style={{ textDecoration: "underline", fontStyle: "italic", cursor: "default" }} className={classes.link}>Collections</h2>
-                {collections.map((item, index) => {
+                {collections.map((item, index) => 
+                {
                     let tempData = item.tags
                     let tags = []
                     tags.splice(tags.length, 0, tempData.name)
-                    while (tempData.hasOwnProperty('subTag') === true) {
+                    while (tempData.hasOwnProperty('subTag') === true) 
+                    {
                         tempData = tempData.subTag
                         tags.splice(tags.length, 0, tempData.name)
                     }
@@ -84,9 +86,9 @@ function Collections({ thumbnail, itemloading, collections, loading, runAssetsBy
                             onClick={() => runAssetsByCollectionsId(item.id)} className={classes.link}>
                             <p className={classes.link}>{item.name}</p>
                             <p className={classes.link2}>
-                                {tags.map((item,index) => {
+                                {tags.map((item, index) => {
                                     return <span className={classes.tags}>{item}</span>
-                                }) }
+                                })}
                             </p>
                             <img className={classes.img} alt="img" src={require(`../data/images/${thumbnail[index]}`)} />
                         </motion.button>

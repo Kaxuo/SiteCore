@@ -25,7 +25,7 @@ function App() {
     setstate(value)
   }
 
-  // Getting all the collections AND the thumbnail AND the single asset linked to the collection (by MasterID) // 
+  // Getting all the collections // the thumbnail // the single asset linked to the collection (by MasterID) // 
 
   const runCollections = async () => {
     let fetchCollection = await getCollectionsAsync()
