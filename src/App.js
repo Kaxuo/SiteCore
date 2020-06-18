@@ -29,7 +29,7 @@ function App() {
 
   const runCollections = async () => {
     let fetchCollection = await getCollectionsAsync()
-    fetchCollection = await Promise.all(fetchCollection.map(async (collection) => ({ ...collection, asset: await getAssetByIdAsync(collection.masterAssetId) })))
+    fetchCollection = await Promise.all(fetchCollection.map(async (collection) => ({ ...collection, asset: await getAssetByIdAsync(collection.masterAssetId)})))
     setcollections(fetchCollection)
     let temp = []
     fetchCollection.map(item => {

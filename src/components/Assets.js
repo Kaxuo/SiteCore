@@ -21,7 +21,7 @@ function Assets({ thumbnail, change, itemloading, assetsByCollections }) {
             paddingTop: "10%",
             justifyContent: "center",
             textAlign: "center",
-            color:"white",
+            color: "white",
             [theme.breakpoints.down('sm')]: {
                 fontSize: "10px",
                 marginLeft: "25%"
@@ -74,7 +74,7 @@ function Assets({ thumbnail, change, itemloading, assetsByCollections }) {
                 .map((item, index) => (
                     thumbnail[item.collectionId - 1] === item.path ?
                         (
-                            <Card key={index} style={{ border: "2px outset blue",borderRadius:"5%" }} className={classes.card}>
+                            <Card key={index} style={{ border: "2px outset blue", borderRadius: "5%" }} className={classes.card}>
                                 <Fade>
                                     <CardActionArea disableRipple={true} style={{ cursor: "default" }}>
                                         <Typography gutterBottom variant="h5" component="h2">
@@ -84,14 +84,14 @@ function Assets({ thumbnail, change, itemloading, assetsByCollections }) {
                                         </Typography>
                                         <img alt="img" src={require(`../data/images/${item.path}`)} />
                                         <CardContent>
-                                            <Typography style={{ textDecoration: "underline",fontWeight:"bold",fontStyle:"italic" }} gutterBottom variant="h5" component="h2">
+                                            <Typography style={{ textDecoration: "underline", fontWeight: "bold", fontStyle: "italic" }} gutterBottom variant="h5" component="h2">
                                                 {item.name}
                                             </Typography>
                                         </CardContent>
-                                    </CardActionArea>
-                                    <Button disabled={true} style={{ marginBottom: "5%" }} onClick={() => change(item)} variant="contained" color="primary">
+                                        <Button disabled={true} style={{ marginBottom: "5%" }} onClick={() => change(item)} variant="contained" color="primary">
                                         Thumbnail
                                     </Button>
+                                    </CardActionArea>
                                 </Fade>
                             </Card>
                         )
@@ -108,10 +108,10 @@ function Assets({ thumbnail, change, itemloading, assetsByCollections }) {
                                             {item.name}
                                         </Typography>
                                     </CardContent>
-                                </CardActionArea>
-                                <Button style={{ marginBottom: "5%" }} onClick={() => change(item)} variant="contained" color="primary">
-                                    Make Master
+                                    <Button style={{ marginBottom: "5%" }} onClick={() => change(item)} variant="contained" color="primary">
+                                        Make Master
                                 </Button>
+                                </CardActionArea>
                             </Fade>
                         </Card>)
                 ))
