@@ -73,7 +73,7 @@ function Collections({ thumbnail, itemloading, collections, loading, runAssetsBy
                     let tempData = item.tags
                     let tags = []
                     tags.splice(tags.length, 0, tempData.name)
-                    while (tempData.hasOwnProperty('subTag') == true) {
+                    while (tempData.hasOwnProperty('subTag') === true) {
                         tempData = tempData.subTag
                         tags.splice(tags.length, 0, tempData.name)
                     }
