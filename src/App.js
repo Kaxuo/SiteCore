@@ -61,7 +61,7 @@ function App() {
     setTimeout(() => {
       setitemloading(false)
       setloading(false)
-    }, 1600);
+    }, 1800);
   }
 
   const simulateLoadingItem = () => {
