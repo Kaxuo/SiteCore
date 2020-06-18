@@ -78,9 +78,9 @@ function Assets({ thumbnail, change, itemloading, assetsByCollections }) {
                                 <Fade>
                                     <CardActionArea disableRipple={true} style={{ cursor: "default" }}>
                                         <Typography gutterBottom variant="h5" component="h2">
-                                            <BsFillStarFill style={{ fontSize: "20px", color: "blue" }} />
-                                            <BsFillStarFill style={{ fontSize: "20px", color: "blue" }} />
-                                            <BsFillStarFill style={{ fontSize: "20px", color: "blue" }} />
+                                            <BsFillStarFill style={{ fontSize: "20px", color: "orange" }} />
+                                            <BsFillStarFill style={{ fontSize: "20px", color: "orange" }} />
+                                            <BsFillStarFill style={{ fontSize: "20px", color: "orange" }} />
                                         </Typography>
                                         <img alt="img" src={require(`../data/images/${item.path}`)} />
                                         <CardContent>
