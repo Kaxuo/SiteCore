@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import ReactLoading from 'react-loading';
-import { motion } from 'framer-motion'
 
 function Collections({ thumbnail, itemloading, collections, loading, runAssetsByCollectionsId }) {
 
@@ -20,19 +19,23 @@ function Collections({ thumbnail, itemloading, collections, loading, runAssetsBy
             },
         },
         link: {
-            display:"flex",
-            flexDirection:"column",
-            alignItems:"center",
-            justifyContent:"center",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
             color: "white",
             cursor: "pointer",
             border: "none",
             background: "inherit",
             outline: "none",
             fontSize: "110%",
-            marginBottom:0,
-            marginTop:"16px",
-            textDecoration:"underline",
+            marginBottom: 0,
+            marginTop: "16px",
+            textDecoration: "underline",
+            transition:"transform 1s",
+            '&:hover': {
+                transform:"scale(1.1)"
+            },
             [theme.breakpoints.down('sm')]: {
                 fontSize: "100%",
                 paddingBottom: "5%",
@@ -49,9 +52,9 @@ function Collections({ thumbnail, itemloading, collections, loading, runAssetsBy
                 display: "none"
             },
         },
-        imgContainer:{
-            width:"7vw",
-            background:"white",
+        imgContainer: {
+            width: "7vw",
+            background: "white",
             [theme.breakpoints.down('sm')]: {
                 width: "15vw",
                 height: "15vw"
@@ -94,11 +97,10 @@ function Collections({ thumbnail, itemloading, collections, loading, runAssetsBy
                     }
                     getTag(tempData);
                     return (
-                        <motion.button
+                        <button
                             key={index}
-                            whileHover={{ scale: 1.1, transition: { duration: 1 }, }} 
                             disabled={itemloading}
-                            onClick={() => runAssetsByCollectionsId(item.id)} 
+                            onClick={() => runAssetsByCollectionsId(item.id)}
                             className={classes.link}>
                             <p className={classes.link}>{item.name}</p>
                             <p className={classes.link2}>
@@ -107,7 +109,7 @@ function Collections({ thumbnail, itemloading, collections, loading, runAssetsBy
                                 })}
                             </p>
                             <div className={classes.imgContainer}><img className={classes.img} alt="img" src={require(`../data/images/${thumbnail[index]}`)} /></div>
-                        </motion.button>
+                        </button>
                     )
                 })}
             </Box>

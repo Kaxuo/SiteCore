@@ -3,7 +3,6 @@ import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
 import ReactLoading from 'react-loading';
 import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
@@ -20,7 +19,7 @@ function Assets({ thumbnail, change, itemloading, assetsByCollections }) {
             display: "flex",
             paddingTop: "10%",
             justifyContent: "center",
-            marginLeft:"18%",
+            marginLeft: "18%",
             color: "white",
             [theme.breakpoints.down('sm')]: {
                 fontSize: "10px",
@@ -47,10 +46,13 @@ function Assets({ thumbnail, change, itemloading, assetsByCollections }) {
         card: {
             width: "30%",
             marginTop: "5%",
-            minHeight: 400,
             cursor: "default",
             marginBottom: "1vh",
             border: "3px outset black",
+            transition:"transform 2s",
+            "&:hover":{
+                transform:"scale(1.1)",
+            },
             [theme.breakpoints.down('md')]: {
                 width: "45%",
                 height: "400px"
@@ -75,7 +77,7 @@ function Assets({ thumbnail, change, itemloading, assetsByCollections }) {
                     thumbnail[item.collectionId - 1] === item.path ?
                         (<Card key={index} style={{ border: "2px outset blue", borderRadius: "5%" }} className={classes.card}>
                             <Fade>
-                                <CardActionArea disableRipple={true} style={{ cursor: "default" }}>
+                                <Card>
                                     <Typography gutterBottom variant="h5" component="h2">
                                         <BsFillStarFill style={{ fontSize: "20px", color: "orange" }} />
                                         <BsFillStarFill style={{ fontSize: "20px", color: "orange" }} />
@@ -87,16 +89,16 @@ function Assets({ thumbnail, change, itemloading, assetsByCollections }) {
                                             {item.name}
                                         </Typography>
                                     </CardContent>
-                                </CardActionArea>
-                                <Button disabled={true} style={{ marginBottom: "5%" }} onClick={() => change(item)} variant="contained" color="primary">
-                                    Thumbnail
+                                    <Button disabled={true} style={{ marginBottom: "5%" }} onClick={() => change(item)} variant="contained" color="primary">
+                                        Thumbnail
                                 </Button>
+                                </Card>
                             </Fade>
                         </Card>)
                         :
                         (<Card key={index} className={classes.card}>
                             <Fade>
-                                <CardActionArea disableRipple={true} style={{ cursor: "default" }}>
+                                <Card>
                                     <Typography gutterBottom variant="h5" component="h2">
                                         {item.id}
                                     </Typography>
@@ -106,10 +108,10 @@ function Assets({ thumbnail, change, itemloading, assetsByCollections }) {
                                             {item.name}
                                         </Typography>
                                     </CardContent>
-                                </CardActionArea>
-                                <Button style={{ marginBottom: "5%" }} onClick={() => change(item)} variant="contained" color="primary">
-                                    Make Master
-                                </Button>
+                                    <Button style={{ marginBottom: "5%" }} onClick={() => change(item)} variant="contained" color="primary">
+                                        Make Master
+                                    </Button>
+                                </Card>
                             </Fade>
                         </Card>)
                 ))
