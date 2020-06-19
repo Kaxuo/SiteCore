@@ -4,10 +4,12 @@ import Collections from './components/Collections'
 import Assets from './components/Assets'
 import Dropdown from './components/Dropdown'
 import Particle from './components/Particle'
+import {sortByName, sortById} from "./useSort"
 import './App.css';
 
 
 function App() {
+
 
   const [loading, setloading] = useState(true)
   const [itemloading, setitemloading] = useState(true)
@@ -15,7 +17,6 @@ function App() {
   const [thumbnail, setthumbnail] = useState([])
   const [assetsByCollections, setassetsByCollections] = useState([])
   const [state, setstate] = useState("name")
-
 
   // HandleChange function for the Dropdown //
 
@@ -25,16 +26,16 @@ function App() {
     setstate(value)
   }
 
+
   // Getting all the collections // the thumbnail // the single asset linked to the collection (by MasterID) // 
 
   const runCollections = async () => {
     let fetchCollection = await getCollectionsAsync()
-    fetchCollection = await Promise.all(fetchCollection.map(async (collection) => ({ ...collection, asset: await getAssetByIdAsync(collection.masterAssetId)})))
+    fetchCollection = await Promise.all(fetchCollection.map(async (collection) => ({ ...collection, asset: await getAssetByIdAsync(collection.masterAssetId) })))
     setcollections(fetchCollection)
     let temp = []
-    fetchCollection.map(item => {
-      temp.splice(temp.length, 0, item.asset.path)
-      return temp
+    temp = fetchCollection.map(item => {
+      return item.asset.path
     })
     setthumbnail(temp)
   }
@@ -45,17 +46,13 @@ function App() {
     simulateLoadingItem()
     const fetchCollectionById = await getAssetsByCollectionAsync(id)
     // Sort by name by default //
-    fetchCollectionById.sort((a, b) => {
-      let nameA = a.name.toUpperCase();
-      let nameB = b.name.toUpperCase();
-      setassetsByCollections(fetchCollectionById)
-      setstate("name")
-      return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0
-    })
+    const sortedByName = sortByName(fetchCollectionById)
+    setassetsByCollections(sortedByName)
+    setstate("name")
     setitemloading(false)
   }
 
-  // Simuate Loading time according to setTimeOut in data.js //
+  // Simulate Loading time according to setTimeOut in data.js //
 
   const simulateloadingTime = () => {
     setTimeout(() => {
@@ -67,7 +64,6 @@ function App() {
   const simulateLoadingItem = () => {
     setitemloading(true)
   }
-
 
   // Make Master button //
 
@@ -84,27 +80,6 @@ function App() {
     runCollections()
   }, []);
 
-
-  // Sorting Functionality //
-
-  const sortByName = () => {
-    let sortedByName = [...assetsByCollections]
-    sortedByName.sort((a, b) => {
-      let nameA = a.name.toUpperCase();
-      let nameB = b.name.toUpperCase();
-      setassetsByCollections(sortedByName)
-      return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0
-    })
-  }
-
-  const sortById = () => {
-    let sortedById = [...assetsByCollections]
-    sortedById.sort((a, b) => {
-      setassetsByCollections(sortedById)
-      return a.id - b.id
-    })
-  }
-
   return (
     <div className="App">
       <Particle />
@@ -116,12 +91,12 @@ function App() {
         collections={collections}
         runAssetsByCollectionsId={runAssetsByCollectionsId} />
       <Dropdown loading={loading}
+        sortById={array => setassetsByCollections(sortById(array))}
+        sortByName={array => setassetsByCollections(sortByName(array))}
         itemloading={itemloading}
         state={state}
         assetsByCollections={assetsByCollections}
-        handleChange={handleChange}
-        sortByName={sortByName}
-        sortById={sortById} />
+        handleChange={handleChange} />
       <Assets
         thumbnail={thumbnail}
         assetsByCollections={assetsByCollections}

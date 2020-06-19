@@ -20,7 +20,7 @@ function Assets({ thumbnail, change, itemloading, assetsByCollections }) {
             display: "flex",
             paddingTop: "10%",
             justifyContent: "center",
-            textAlign: "center",
+            marginLeft:"18%",
             color: "white",
             [theme.breakpoints.down('sm')]: {
                 fontSize: "10px",
@@ -74,25 +74,25 @@ function Assets({ thumbnail, change, itemloading, assetsByCollections }) {
                 .map((item, index) => (
                     thumbnail[item.collectionId - 1] === item.path ?
                         (<Card key={index} style={{ border: "2px outset blue", borderRadius: "5%" }} className={classes.card}>
-                                <Fade>
-                                    <CardActionArea disableRipple={true} style={{ cursor: "default" }}>
-                                        <Typography gutterBottom variant="h5" component="h2">
-                                            <BsFillStarFill style={{ fontSize: "20px", color: "orange" }} />
-                                            <BsFillStarFill style={{ fontSize: "20px", color: "orange" }} />
-                                            <BsFillStarFill style={{ fontSize: "20px", color: "orange" }} />
+                            <Fade>
+                                <CardActionArea disableRipple={true} style={{ cursor: "default" }}>
+                                    <Typography gutterBottom variant="h5" component="h2">
+                                        <BsFillStarFill style={{ fontSize: "20px", color: "orange" }} />
+                                        <BsFillStarFill style={{ fontSize: "20px", color: "orange" }} />
+                                        <BsFillStarFill style={{ fontSize: "20px", color: "orange" }} />
+                                    </Typography>
+                                    <img alt="img" src={require(`../data/images/${item.path}`)} />
+                                    <CardContent>
+                                        <Typography style={{ textDecoration: "underline", fontWeight: "bold", fontStyle: "italic" }} gutterBottom variant="h5" component="h2">
+                                            {item.name}
                                         </Typography>
-                                        <img alt="img" src={require(`../data/images/${item.path}`)} />
-                                        <CardContent>
-                                            <Typography style={{ textDecoration: "underline", fontWeight: "bold", fontStyle: "italic" }} gutterBottom variant="h5" component="h2">
-                                                {item.name}
-                                            </Typography>
-                                        </CardContent>
-                                        <Button disabled={true} style={{ marginBottom: "5%" }} onClick={() => change(item)} variant="contained" color="primary">
-                                        Thumbnail
-                                    </Button>
-                                    </CardActionArea>
-                                </Fade>
-                            </Card>)
+                                    </CardContent>
+                                </CardActionArea>
+                                <Button disabled={true} style={{ marginBottom: "5%" }} onClick={() => change(item)} variant="contained" color="primary">
+                                    Thumbnail
+                                </Button>
+                            </Fade>
+                        </Card>)
                         :
                         (<Card key={index} className={classes.card}>
                             <Fade>
@@ -106,10 +106,10 @@ function Assets({ thumbnail, change, itemloading, assetsByCollections }) {
                                             {item.name}
                                         </Typography>
                                     </CardContent>
-                                    <Button style={{ marginBottom: "5%" }} onClick={() => change(item)} variant="contained" color="primary">
-                                        Make Master
-                                </Button>
                                 </CardActionArea>
+                                <Button style={{ marginBottom: "5%" }} onClick={() => change(item)} variant="contained" color="primary">
+                                    Make Master
+                                </Button>
                             </Fade>
                         </Card>)
                 ))

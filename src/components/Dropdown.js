@@ -4,7 +4,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
-function Dropdown({ loading, itemloading, state, handleChange, sortByName, sortById, assetsByCollections }) {
+function Dropdown({ loading, itemloading, state, handleChange, assetsByCollections,sortByName,sortById }) {
 
     const useStyles = makeStyles((theme) => ({
         formControl: {
@@ -35,8 +35,8 @@ function Dropdown({ loading, itemloading, state, handleChange, sortByName, sortB
                     value={state}
                     onChange={handleChange}
                 >
-                    <MenuItem onClick={sortByName} value="name">Sort By Name</MenuItem>
-                    <MenuItem onClick={sortById} value="Id">Sort By ID</MenuItem>
+                    <MenuItem onClick={() => sortByName(assetsByCollections)} value="name">Sort By Name</MenuItem>
+                    <MenuItem onClick={() => sortById(assetsByCollections)} value="Id">Sort By ID</MenuItem>
                 </Select>
             </FormControl>
         )

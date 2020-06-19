@@ -20,14 +20,19 @@ function Collections({ thumbnail, itemloading, collections, loading, runAssetsBy
             },
         },
         link: {
-            textDecoration: "none",
+            display:"flex",
+            flexDirection:"column",
+            alignItems:"center",
+            justifyContent:"center",
             color: "white",
             cursor: "pointer",
-            display: "block",
             border: "none",
             background: "inherit",
             outline: "none",
             fontSize: "110%",
+            marginBottom:0,
+            marginTop:"16px",
+            textDecoration:"underline",
             [theme.breakpoints.down('sm')]: {
                 fontSize: "100%",
                 paddingBottom: "5%",
@@ -44,11 +49,18 @@ function Collections({ thumbnail, itemloading, collections, loading, runAssetsBy
                 display: "none"
             },
         },
-        img: {
-            width: "7vw",
-            height: "7vw",
+        imgContainer:{
+            width:"7vw",
+            background:"white",
             [theme.breakpoints.down('sm')]: {
                 width: "15vw",
+                height: "15vw"
+            },
+        },
+        img: {
+            width: "auto",
+            height: "7vw",
+            [theme.breakpoints.down('sm')]: {
                 height: "15vw"
             },
         },
@@ -56,11 +68,11 @@ function Collections({ thumbnail, itemloading, collections, loading, runAssetsBy
             margin: 5,
             color: "black",
             backgroundColor: "white",
-            borderRadius: 5
+            borderRadius: 1
         }
     }));
-
     const classes = useStyles();
+
 
     if (loading) {
         return <Box display="flex" justifyContent="center" alignItems="center" className={classes.sidebar}><ReactLoading type="bars" color="white" height={100} width={50} /></Box>
@@ -69,28 +81,32 @@ function Collections({ thumbnail, itemloading, collections, loading, runAssetsBy
         <Box className={classes.sidebar}>
             <Box style={{ height: "100%" }} display="flex" justifyContent="space-around" flexDirection="column" alignItems="center">
                 <h2 style={{ textDecoration: "underline", fontStyle: "italic", cursor: "default" }} className={classes.link}>Collections</h2>
-                {collections.map((item, index) => 
-                {
+                {collections.map((item, index) => {
+                    // Recursive Tags // 
                     let tempData = item.tags
                     let tags = []
-                    tags.splice(tags.length, 0, tempData.name)
-                    while (tempData.hasOwnProperty('subTag') === true) 
-                    {
-                        tempData = tempData.subTag
-                        tags.splice(tags.length, 0, tempData.name)
+                    const getTag = (item) => {
+                        if (item.hasOwnProperty('subTag') === true) {
+                            tags.push(item.name)
+                            getTag(item.subTag)
+                        } else
+                            tags.push(item.name)
                     }
+                    getTag(tempData);
                     return (
                         <motion.button
                             key={index}
-                            whileHover={{ scale: 1.1, transition: { duration: 1 }, }} disabled={itemloading}
-                            onClick={() => runAssetsByCollectionsId(item.id)} className={classes.link}>
+                            whileHover={{ scale: 1.1, transition: { duration: 1 }, }} 
+                            disabled={itemloading}
+                            onClick={() => runAssetsByCollectionsId(item.id)} 
+                            className={classes.link}>
                             <p className={classes.link}>{item.name}</p>
                             <p className={classes.link2}>
                                 {tags.map((item, index) => {
-                                    return <span className={classes.tags}>{item}</span>
+                                    return <span key={index} className={classes.tags}>{item}</span>
                                 })}
                             </p>
-                            <img className={classes.img} alt="img" src={require(`../data/images/${thumbnail[index]}`)} />
+                            <div className={classes.imgContainer}><img className={classes.img} alt="img" src={require(`../data/images/${thumbnail[index]}`)} /></div>
                         </motion.button>
                     )
                 })}
